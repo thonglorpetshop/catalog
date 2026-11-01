@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>THONGLOR PET COMMONS · E-Catalogs</title>
+<meta name="theme-color" content="#00AEEF">
+<style>
+  html, body { margin: 0; height: 100%; background: #F6FAFB; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  #fallback { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; text-align: center;
+              font: 16px/1.5 Tahoma, sans-serif; color: #33475B; padding: 24px; }
+  #fallback a { display: inline-block; margin-top: 12px; background: #00AEEF; color: #fff; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: bold; }
+</style>
+</head>
+<body>
+<!--
+  หน้าครอบระบบ E-Catalogs (ไม่มีแถบ "สร้างโดยผู้ใช้ Google Apps Script")
+  เว็บ: https://thonglorpetshop.github.io/catalog/
+  Apps Script → พร็อพเพอร์ตีของสคริปต์ → PUBLIC_URL = https://thonglorpetshop.github.io/catalog/
+  ลิงก์: ?mode=staff  ?mode=customer  ?mode=admin  และ QR ?p=SKU
+-->
+<iframe id="app" title="THONGLOR PET COMMONS E-Catalogs" allow="autoplay; clipboard-write; fullscreen"></iframe>
+<div id="fallback">
+  <div>
+    ถ้าหน้าไม่ขึ้น กดเปิดระบบโดยตรงได้ที่ปุ่มด้านล่าง<br>
+    <a id="direct" href="#" target="_top">เปิด E-Catalogs</a>
+  </div>
+</div>
+<script>
+  var EXEC_URL = 'https://script.google.com/macros/s/AKfycbxL1E3cQo6DFPp5sFAykjpZebDCuImUKPFODAHXNgSUZE_KuRwoY6F6hUK2_CU5wTME3g/exec';
+
+  // ส่ง ?mode= / ?p= / ?productId= และพารามิเตอร์อื่นจากลิงก์หน้านี้ ต่อไปให้ระบบ
+  var src = EXEC_URL + (location.search || '');
+  var frame = document.getElementById('app');
+  frame.src = src;
+  document.getElementById('direct').href = src;
+
+  // ถ้า 15 วินาทียังโหลดไม่ขึ้น (เช่น เครือข่ายบล็อก) แสดงปุ่มเปิดโดยตรง
+  var loaded = false;
+  frame.addEventListener('load', function () { loaded = true; });
+  setTimeout(function () { if (!loaded) document.getElementById('fallback').style.display = 'flex'; }, 15000);
+</script>
+</body>
+</html>
