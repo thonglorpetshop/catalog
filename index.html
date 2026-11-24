@@ -28,18 +28,19 @@
   </div>
 </div>
 <script>
-  var EXEC_URL = 'https://script.google.com/macros/s/AKfycbxL1E3cQo6DFPp5sFAykjpZebDCuImUKPFODAHXNgSUZE_KuRwoY6F6hUK2_CU5wTME3g/exec';
+  var EXEC_URL = 'https://129-221-208-10.sslip.io/';
 
   // ส่ง ?mode= / ?p= / ?productId= และพารามิเตอร์อื่นจากลิงก์หน้านี้ ต่อไปให้ระบบ
   var src = EXEC_URL + (location.search || '');
   var frame = document.getElementById('app');
-  frame.src = src;
   document.getElementById('direct').href = src;
+  // ระบบใหม่ (Oracle): ส่งต่อทั้งหน้า ไม่ฝังใน iframe เพื่อให้ส่วนขยาย HN, การติดตั้งแอป และการล็อกอินทำงานปกติ
+  location.replace(src);
 
-  // ถ้า 15 วินาทียังโหลดไม่ขึ้น (เช่น เครือข่ายบล็อก) แสดงปุ่มเปิดโดยตรง
+  // ถ้า 4 วินาทียังโหลดไม่ขึ้น (เช่น เครือข่ายบล็อก) แสดงปุ่มเปิดโดยตรง
   var loaded = false;
   frame.addEventListener('load', function () { loaded = true; });
-  setTimeout(function () { if (!loaded) document.getElementById('fallback').style.display = 'flex'; }, 15000);
+  setTimeout(function () { if (!loaded) document.getElementById('fallback').style.display = 'flex'; }, 4000);
 </script>
 </body>
 </html>
